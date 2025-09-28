@@ -46,7 +46,6 @@ const Header = () => {
               <span>ForumHub</span>
             </Link>
 
-            {/* Search Bar */}
             <div className="hidden md:flex relative">
               <input
                 type="text"
@@ -61,7 +60,6 @@ const Header = () => {
             <div className="flex items-center space-x-2 sm:space-x-4">
               {isAuthenticated ? (
                 <>
-                  {/* Notifications */}
                   <div className="relative" ref={notificationRef}>
                     <button 
                       onClick={() => setShowNotifications(!showNotifications)}
@@ -157,7 +155,6 @@ const Header = () => {
                     </Link>
                   )}
 
-                  {/* Mobile Search */}
                   <button className="md:hidden p-2 text-gray-600 hover:text-gray-900 hover:bg-white/50 rounded-xl transition-all">
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />

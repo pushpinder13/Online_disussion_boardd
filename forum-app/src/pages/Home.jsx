@@ -38,7 +38,6 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
       <div className="max-w-7xl mx-auto px-4 py-6 sm:py-10">
-        {/* Hero Section */}
         <div className="text-center mb-8 animate-fade-in-up">
           <h1 className="text-3xl sm:text-4xl font-bold text-gradient mb-4">
             Welcome to ForumHub
@@ -47,7 +46,6 @@ const Home = () => {
             Join the conversation, share ideas, and connect with like-minded people
           </p>
           
-          {/* Quick Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mb-8">
             <div className="bg-white/70 backdrop-blur-sm rounded-xl p-4 border border-white/30">
               <div className="text-2xl font-bold text-blue-600">{allThreads?.length || 0}</div>
@@ -71,7 +69,6 @@ const Home = () => {
             </div>
           </div>
 
-          {/* Quick Actions */}
           <div className="flex flex-wrap justify-center gap-4 mb-8">
             <Link 
               to="/create" 
@@ -120,7 +117,6 @@ const Home = () => {
           </div>
           
           <main className="flex-1 min-w-0">
-            {/* Featured Threads */}
             {!selectedCategory && allThreads?.length > 0 && (
               <div className="glass-effect rounded-3xl shadow-xl p-6 sm:p-8 mb-6 border border-white/20">
                 <div className="flex items-center justify-between mb-6">
@@ -243,7 +239,6 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Categories Modal */}
       {showCategoriesModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-96 overflow-hidden">

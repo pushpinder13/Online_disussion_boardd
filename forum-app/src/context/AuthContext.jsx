@@ -32,7 +32,6 @@ export const AuthProvider = ({ children }) => {
 
   const setupTokenRefresh = useCallback(() => {
     if (refreshTimer) clearInterval(refreshTimer);
-    // Refresh token every 10 minutes
     const timer = setInterval(refreshToken, 10 * 60 * 1000);
     setRefreshTimer(timer);
   }, [refreshToken, refreshTimer]);
@@ -95,7 +94,7 @@ export const AuthProvider = ({ children }) => {
     try {
       await authAPI.logout();
     } catch (error) {
-      // Ignore logout errors
+      console.error(error);
     }
     
     if (refreshTimer) clearInterval(refreshTimer);

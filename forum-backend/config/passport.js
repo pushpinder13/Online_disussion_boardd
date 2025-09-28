@@ -79,7 +79,7 @@ module.exports = function (passport) {
 
   passport.use('jwt', new JwtStrategy(opts, async (jwt_payload, done) => {
     try {
-      // Only allow access tokens for authentication
+
       if (jwt_payload.type && jwt_payload.type !== 'access') {
         return done(null, false);
       }
@@ -95,7 +95,7 @@ module.exports = function (passport) {
     }
   }));
 
-  // Refresh token strategy
+
   const refreshOpts = {
     jwtFromRequest: refreshTokenExtractor,
     secretOrKey: process.env.JWT_SECRET || process.env.JWT_SECRET_KEY
@@ -103,7 +103,7 @@ module.exports = function (passport) {
 
   passport.use('jwt-refresh', new JwtStrategy(refreshOpts, async (jwt_payload, done) => {
     try {
-      // Only allow refresh tokens
+
       if (jwt_payload.type !== 'refresh') {
         return done(null, false);
       }

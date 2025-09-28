@@ -94,14 +94,14 @@ const threadSchema = new mongoose.Schema({
   timestamps: true
 });
 
-// Virtual for vote count
+
 threadSchema.virtual('voteCount').get(function() {
   const upvotes = this.votes.filter(vote => vote.type === 'upvote').length;
   const downvotes = this.votes.filter(vote => vote.type === 'downvote').length;
   return upvotes - downvotes;
 });
 
-// Virtual for reply count
+
 threadSchema.virtual('replyCount').get(function() {
   const countReplies = (replies) => {
     let count = replies.length;
@@ -113,7 +113,7 @@ threadSchema.virtual('replyCount').get(function() {
   return countReplies(this.replies);
 });
 
-// Ensure virtual fields are serialized
+
 threadSchema.set('toJSON', { virtuals: true });
 
 module.exports = mongoose.model('Thread', threadSchema);

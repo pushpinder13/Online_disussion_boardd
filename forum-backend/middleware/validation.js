@@ -1,6 +1,6 @@
 const { body, query, param } = require('express-validator');
 
-// Thread validation
+
 exports.validateThread = [
   body('title')
     .trim()
@@ -20,7 +20,7 @@ exports.validateThread = [
     .withMessage('Maximum 5 tags allowed')
 ];
 
-// User registration validation
+
 exports.validateRegistration = [
   body('username')
     .trim()
@@ -37,7 +37,7 @@ exports.validateRegistration = [
     .withMessage('Password must be at least 6 characters with uppercase, lowercase, and number')
 ];
 
-// Search validation
+
 exports.validateSearch = [
   query('search')
     .optional()
@@ -54,7 +54,7 @@ exports.validateSearch = [
     .withMessage('Limit must be between 1 and 50')
 ];
 
-// MongoDB ID validation
+
 exports.validateId = [
   param('id')
     .isMongoId()

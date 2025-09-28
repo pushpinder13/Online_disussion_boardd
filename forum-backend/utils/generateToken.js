@@ -6,14 +6,14 @@ const resolveSecret = () => {
 };
 
 const generateTokens = (userId, res) => {
-  // Access token (short-lived)
+
   const accessToken = jwt.sign(
     { userId, type: 'access' },
     resolveSecret(),
     { expiresIn: '15m' }
   );
 
-  // Refresh token (long-lived)
+
   const refreshToken = jwt.sign(
     { userId, type: 'refresh' },
     resolveSecret(),
@@ -21,7 +21,7 @@ const generateTokens = (userId, res) => {
   );
 
   if (res && typeof res.cookie === 'function') {
-    // Set access token in cookie
+
     res.cookie('token', accessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
@@ -29,7 +29,7 @@ const generateTokens = (userId, res) => {
       maxAge: 15 * 60 * 1000 // 15 minutes
     });
 
-    // Set refresh token in cookie
+
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
@@ -41,7 +41,7 @@ const generateTokens = (userId, res) => {
   return { accessToken, refreshToken };
 };
 
-// Legacy function for backward compatibility
+
 const generateToken = (userId, res) => {
   const tokens = generateTokens(userId, res);
   return tokens.accessToken;

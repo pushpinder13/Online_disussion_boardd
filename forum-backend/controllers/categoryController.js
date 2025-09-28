@@ -9,13 +9,12 @@ exports.getAll = async (req, res) => {
   }
   try {
     const query = {};
-    // If admin is requesting with showAll, show all categories
+
     if (req.user && req.user.role === 'admin' && req.query.showAll === 'true') {
-      // No filter - show all categories
+      
     } else if (req.query.isActive !== undefined) {
       query.isActive = req.query.isActive === 'true';
     } else {
-      // Default: only show active categories
       query.isActive = true;
     }
     const categories = await Category.find(query);

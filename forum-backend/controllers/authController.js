@@ -12,7 +12,6 @@ exports.register = async (req, res) => {
 
     const { username, email, password, role, adminCode } = req.body;
 
-    // Validate admin code if role is admin
     if (role === 'admin' && adminCode !== '100') {
       return res.status(400).json({
         message: 'Invalid admin code'
