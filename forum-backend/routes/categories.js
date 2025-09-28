@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/', [
   query('isActive').optional().isBoolean().withMessage('isActive must be a boolean'),
   query('showAll').optional().isBoolean().withMessage('showAll must be a boolean')
-], requireAuth, controller.getAll);
+], controller.getAll);
 
 router.get('/:id', [
   query('includeThreadCount').optional().isBoolean().withMessage('includeThreadCount must be a boolean')

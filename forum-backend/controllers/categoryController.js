@@ -15,7 +15,7 @@ exports.getAll = async (req, res) => {
     } else if (req.query.isActive !== undefined) {
       query.isActive = req.query.isActive === 'true';
     } else {
-      // Default: only show active categories for non-admin or when showAll is not specified
+      // Default: only show active categories
       query.isActive = true;
     }
     const categories = await Category.find(query);
