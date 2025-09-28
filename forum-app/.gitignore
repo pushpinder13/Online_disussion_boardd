@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+
+# Production build
+build/
+dist/
+
+# Environment variables
+.env
+.env.local
+.env.production.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+.pnp
+.pnp.js
+
+# Coverage
+coverage/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Misc
+.eslintcache
