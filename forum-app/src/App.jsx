@@ -1,12 +1,16 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import { ThemeProvider } from './context/ThemeContext.jsx';
 import ErrorBoundary from './components/ErrorBoundary';
 import Header from './components/Header';
+import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
 import CreateThread from './pages/CreateThread';
 import ThreadDetail from './pages/ThreadDetail';
 import Profile from './pages/Profile';
 import MyThreads from './pages/MyThreads';
+import Settings from './pages/Settings';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminLayout from './components/admin/AdminLayout';
 import AdminDashboard from './pages/admin/AdminDashboard';
@@ -17,26 +21,31 @@ import CategoriesManagement from './pages/admin/CategoriesManagement';
 function App() {
   return (
     <ErrorBoundary>
-      <AuthProvider>
-        <Router>
+      <ThemeProvider>
+        <AuthProvider>
+          <Router>
+          <ScrollToTop />
         <div className="min-h-screen bg-gray-50">
           <Routes>
             <Route path="/" element={
               <>
                 <Header />
                 <Home />
+                <Footer />
               </>
             } />
             <Route path="/thread/:id" element={
               <>
                 <Header />
                 <ThreadDetail />
+                <Footer />
               </>
             } />
             <Route path="/create" element={
               <ProtectedRoute>
                 <Header />
                 <CreateThread />
+                <Footer />
               </ProtectedRoute>
             } />
             
@@ -75,18 +84,28 @@ function App() {
               <ProtectedRoute>
                 <Header />
                 <Profile />
+                <Footer />
               </ProtectedRoute>
             } />
             <Route path="/my-threads" element={
               <ProtectedRoute>
                 <Header />
                 <MyThreads />
+                <Footer />
+              </ProtectedRoute>
+            } />
+            <Route path="/settings" element={
+              <ProtectedRoute>
+                <Header />
+                <Settings />
+                <Footer />
               </ProtectedRoute>
             } />
           </Routes>
         </div>
-        </Router>
-      </AuthProvider>
+          </Router>
+        </AuthProvider>
+      </ThemeProvider>
     </ErrorBoundary>
   );
 }

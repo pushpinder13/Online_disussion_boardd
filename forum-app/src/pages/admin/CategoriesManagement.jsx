@@ -21,6 +21,8 @@ const CategoriesManagement = () => {
   }, []);
 
   const [showAddModal, setShowAddModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [editingCategory, setEditingCategory] = useState(null);
   const [newCategory, setNewCategory] = useState({
     name: '',
     description: '',
@@ -46,6 +48,36 @@ const CategoriesManagement = () => {
       setCategories(categories.map(cat => 
         cat._id === id ? { ...cat, isActive: !cat.isActive } : cat
       ));
+    } catch (error) {
+      console.error('Failed to update category:', error);
+    }
+  };
+
+  const handleEditCategory = (category) => {
+    setEditingCategory({
+      id: category._id,
+      name: category.name,
+      description: category.description || '',
+      color: category.color || '#3B82F6'
+    });
+    setShowEditModal(true);
+  };
+
+  const handleUpdateCategory = async (e) => {
+    e.preventDefault();
+    try {
+      await categoriesAPI.update(editingCategory.id, {
+        name: editingCategory.name,
+        description: editingCategory.description,
+        color: editingCategory.color
+      });
+      setCategories(categories.map(cat => 
+        cat._id === editingCategory.id 
+          ? { ...cat, name: editingCategory.name, description: editingCategory.description, color: editingCategory.color }
+          : cat
+      ));
+      setShowEditModal(false);
+      setEditingCategory(null);
     } catch (error) {
       console.error('Failed to update category:', error);
     }
@@ -104,7 +136,10 @@ const CategoriesManagement = () => {
                 >
                   {category.isActive ? 'Deactivate' : 'Activate'}
                 </button>
-                <button className="px-3 py-1 text-xs font-medium bg-blue-100 text-blue-700 rounded hover:bg-blue-200">
+                <button 
+                  onClick={() => handleEditCategory(category)}
+                  className="px-3 py-1 text-xs font-medium bg-blue-100 text-blue-700 rounded hover:bg-blue-200"
+                >
                   Edit
                 </button>
               </div>
@@ -112,6 +147,73 @@ const CategoriesManagement = () => {
           </div>
         ))}
       </div>
+
+      {/* Edit Category Modal */}
+      {showEditModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md">
+            <div className="bg-gradient-to-r from-green-600 to-teal-600 p-6 text-white rounded-t-2xl">
+              <div className="flex justify-between items-center">
+                <h2 className="text-xl font-bold">Edit Category</h2>
+                <button onClick={() => setShowEditModal(false)} className="text-white/80 hover:text-white">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <form onSubmit={handleUpdateCategory} className="p-6 space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                <input
+                  type="text"
+                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  value={editingCategory?.name || ''}
+                  onChange={(e) => setEditingCategory({...editingCategory, name: e.target.value})}
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Description</label>
+                <textarea
+                  rows={3}
+                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent resize-none"
+                  value={editingCategory?.description || ''}
+                  onChange={(e) => setEditingCategory({...editingCategory, description: e.target.value})}
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Color</label>
+                <input
+                  type="color"
+                  className="w-full h-10 border border-gray-200 rounded-lg"
+                  value={editingCategory?.color || '#3B82F6'}
+                  onChange={(e) => setEditingCategory({...editingCategory, color: e.target.value})}
+                />
+              </div>
+
+              <div className="flex space-x-3 pt-4">
+                <button
+                  type="button"
+                  onClick={() => setShowEditModal(false)}
+                  className="flex-1 py-2 border border-gray-200 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="flex-1 bg-gradient-to-r from-green-600 to-teal-600 text-white py-2 rounded-lg font-semibold hover:from-green-700 hover:to-teal-700 transition-all"
+                >
+                  Update Category
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
 
       {/* Add Category Modal */}
       {showAddModal && (

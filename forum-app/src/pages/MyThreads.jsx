@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { threadsAPI } from '../api/threads';
+import ModernLoader from '../components/ModernLoader';
 
 const MyThreads = () => {
   const { user } = useAuth();
@@ -29,81 +30,100 @@ const MyThreads = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 flex items-center justify-center">
+        <ModernLoader size="xl" text="Loading your discussions..." />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
-      <div className="max-w-4xl mx-auto px-4 py-8">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">My Threads</h1>
-          <Link
-            to="/create"
-            className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all"
-          >
-            Create New Thread
-          </Link>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 bg-mesh">
+      <div className="max-w-6xl mx-auto px-4 py-8">
+        <div className="glass-enhanced rounded-3xl shadow-2xl p-8 mb-8 border border-white/20 hover-lift animate-fade-in-up">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            <div className="text-center md:text-left">
+              <h1 className="text-4xl font-bold text-gradient-enhanced mb-2 flex items-center justify-center md:justify-start">
+                <span className="mr-3 text-3xl">📝</span>
+                My Discussions
+              </h1>
+              <p className="text-gray-600 text-lg">Manage and track all your conversations</p>
+            </div>
+            <div className="flex space-x-4">
+              <div className="text-center">
+                <div className="text-2xl font-bold text-blue-600">{threads.length}</div>
+                <div className="text-sm text-gray-600">Total Threads</div>
+              </div>
+              <Link
+                to="/create"
+                className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-2xl hover:from-blue-700 hover:to-purple-700 transition-all hover-lift shadow-lg flex items-center space-x-2"
+              >
+                <span>🚀</span>
+                <span>Create New Discussion</span>
+              </Link>
+            </div>
+          </div>
         </div>
 
         {threads.length > 0 ? (
-          <div className="space-y-6">
-            {threads.map((thread) => (
-              <div key={thread._id} className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow">
-                <div className="flex items-start justify-between">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {threads.map((thread, index) => (
+              <div key={thread._id} className="glass-enhanced rounded-3xl shadow-xl p-6 border border-white/20 hover-lift animate-fade-in-up" style={{animationDelay: `${index * 0.1}s`}}>
+                <div className="flex items-start justify-between mb-4">
                   <div className="flex-1">
                     <Link
                       to={`/thread/${thread._id}`}
-                      className="text-xl font-semibold text-gray-900 hover:text-blue-600 transition-colors"
+                      className="text-xl font-bold text-gray-900 hover:text-blue-600 transition-colors block mb-3 line-clamp-2"
                     >
                       {thread.title}
                     </Link>
-                    <p className="text-gray-600 mt-2 line-clamp-2">{thread.content}</p>
-                    
-                    <div className="flex items-center space-x-6 mt-4 text-sm text-gray-500">
-                      <span className="flex items-center">
-                        <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
-                        </svg>
-                        {thread.replies?.length || 0} replies
-                      </span>
-                      <span className="flex items-center">
-                        <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                        </svg>
-                        {thread.views || 0} views
-                      </span>
-                      <span>{new Date(thread.createdAt).toLocaleDateString()}</span>
-                    </div>
+                    <p className="text-gray-600 line-clamp-3 mb-4">{thread.content}</p>
                   </div>
-                  
+                </div>
+                
+                <div className="flex flex-wrap items-center gap-3 mb-4">
+                  <span className="flex items-center text-blue-600 bg-blue-50 px-3 py-1 rounded-full text-sm font-medium">
+                    <span className="mr-1">💬</span>
+                    {thread.replies?.length || 0} replies
+                  </span>
+                  <span className="flex items-center text-green-600 bg-green-50 px-3 py-1 rounded-full text-sm font-medium">
+                    <span className="mr-1">👁️</span>
+                    {thread.views || 0} views
+                  </span>
+                  <span className="flex items-center text-purple-600 bg-purple-50 px-3 py-1 rounded-full text-sm font-medium">
+                    <span className="mr-1">📅</span>
+                    {new Date(thread.createdAt).toLocaleDateString()}
+                  </span>
+                </div>
+                
+                <div className="flex items-center justify-between">
                   {thread.category && (
-                    <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium ml-4">
+                    <span className="bg-gradient-to-r from-blue-100 to-purple-100 text-blue-800 px-4 py-2 rounded-2xl text-sm font-bold border border-blue-200">
                       {thread.category.name}
                     </span>
                   )}
+                  <Link
+                    to={`/thread/${thread._id}`}
+                    className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all text-sm font-medium"
+                  >
+                    View Discussion →
+                  </Link>
                 </div>
               </div>
             ))}
           </div>
         ) : (
-          <div className="bg-white rounded-2xl shadow-lg p-12 text-center">
-            <svg className="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-            </svg>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">No threads yet</h3>
-            <p className="text-gray-600 mb-6">You haven't created any threads yet. Start a discussion!</p>
+          <div className="glass-enhanced rounded-3xl shadow-2xl p-16 text-center border border-white/20 animate-fade-in-up">
+            <div className="w-24 h-24 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl animate-float">
+              📝
+            </div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">No discussions yet</h3>
+            <p className="text-gray-600 mb-8 text-lg max-w-md mx-auto">You haven't created any discussions yet. Share your thoughts and start engaging conversations!</p>
             <Link
               to="/create"
-              className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all inline-flex items-center"
+              className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-2xl hover:from-blue-700 hover:to-purple-700 transition-all hover-lift shadow-lg inline-flex items-center space-x-2"
             >
-              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-              </svg>
-              Create Your First Thread
+              <span>🚀</span>
+              <span>Create Your First Discussion</span>
             </Link>
           </div>
         )}

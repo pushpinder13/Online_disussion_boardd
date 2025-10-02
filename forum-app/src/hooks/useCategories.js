@@ -6,21 +6,21 @@ export const useCategories = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        setLoading(true);
-        const response = await categoriesAPI.getAll();
-        setCategories(response.data.categories || response.data);
-      } catch (err) {
-        setError(err.response?.data?.message || 'Failed to fetch categories');
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchCategories = async () => {
+    try {
+      setLoading(true);
+      const response = await categoriesAPI.getAll();
+      setCategories(response.data.categories || response.data);
+    } catch (err) {
+      setError(err.response?.data?.message || 'Failed to fetch categories');
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchCategories();
   }, []);
 
-  return { categories, loading, error };
+  return { categories, loading, error, refetch: fetchCategories };
 };

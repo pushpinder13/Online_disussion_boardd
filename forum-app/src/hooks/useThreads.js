@@ -22,5 +22,9 @@ export const useThreads = (params = {}) => {
     fetchThreads();
   }, [JSON.stringify(params)]);
 
+  useEffect(() => {
+    setError(null);
+  }, [params]);
+
   return { threads, loading, error, refetch: fetchThreads };
 };

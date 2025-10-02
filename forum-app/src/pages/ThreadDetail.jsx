@@ -4,6 +4,7 @@ import { threadsAPI } from '../api/threads';
 import { repliesAPI } from '../api/replies';
 import { votesAPI } from '../api/votes';
 import { useAuth } from '../context/AuthContext';
+import ModernLoader from '../components/ModernLoader';
 
 const ThreadDetail = () => {
   const { id } = useParams();
@@ -171,8 +172,8 @@ const ThreadDetail = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 flex items-center justify-center">
+        <ModernLoader size="xl" text="Loading discussion..." />
       </div>
     );
   }
@@ -189,16 +190,16 @@ const ThreadDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
-      <div className="max-w-4xl mx-auto px-4 py-4 sm:py-8">
-        <Link to="/" className="inline-flex items-center text-blue-600 hover:text-blue-700 mb-6">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 bg-mesh">
+      <div className="max-w-4xl mx-auto px-4 py-8">
+        <Link to="/" className="inline-flex items-center text-blue-600 hover:text-blue-700 mb-8 bg-white/70 backdrop-blur-sm px-4 py-2 rounded-xl hover:bg-white/90 transition-all border border-white/30 hover-lift">
           <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
           Back to Discussions
         </Link>
 
-        <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-8 mb-6 sm:mb-8">
+        <div className="glass-enhanced rounded-3xl shadow-2xl p-8 mb-8 border border-white/20 hover-lift animate-fade-in-up">
           <div className="flex items-center mb-6">
             {thread.category && (
               <span className="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium mr-4">
@@ -317,7 +318,7 @@ const ThreadDetail = () => {
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-lg p-8">
+        <div className="glass-enhanced rounded-3xl shadow-2xl p-8 border border-white/20 hover-lift animate-fade-in-up" style={{animationDelay: '0.2s'}}>
           <h2 className="text-2xl font-bold text-gray-900 mb-6">
             Replies ({thread.replies?.length || 0})
           </h2>
