@@ -37,10 +37,27 @@ const QuickActions = () => {
       link: '/my-threads',
       bgColor: 'bg-gradient-to-r from-green-500 to-green-600',
       requireAuth: true
+    },
+    {
+      icon: '🔥',
+      title: 'Trending',
+      description: 'Hot topics',
+      link: '#trending',
+      bgColor: 'bg-gradient-to-r from-red-500 to-pink-500',
+      requireAuth: false,
+      onClick: () => document.querySelector('.trending-section')?.scrollIntoView({ behavior: 'smooth' })
+    },
+    {
+      icon: '⚙️',
+      title: 'Settings',
+      description: 'Preferences',
+      link: '/settings',
+      bgColor: 'bg-gradient-to-r from-gray-500 to-slate-600',
+      requireAuth: true
     }
   ];
 
-  const visibleActions = actions.filter(action => !action.requireAuth || isAuthenticated);
+  const visibleActions = actions;
 
   return (
     <div className="glass-enhanced rounded-3xl shadow-xl p-6 border border-white/20 animate-fade-in-up">
@@ -49,12 +66,7 @@ const QuickActions = () => {
         Quick Actions
       </h3>
       
-      <div className={`grid gap-4 ${
-        visibleActions.length === 1 ? 'grid-cols-1' :
-        visibleActions.length === 2 ? 'grid-cols-2' :
-        visibleActions.length === 3 ? 'grid-cols-3' :
-        'grid-cols-2 md:grid-cols-4'
-      }`}>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
         {visibleActions.map((action, index) => {
           if (action.onClick) {
             return (
