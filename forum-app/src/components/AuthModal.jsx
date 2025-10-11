@@ -50,7 +50,7 @@ const AuthModal = ({ isOpen, onClose, mode, onModeChange }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fade-in-up">
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 animate-fade-in-up" style={{zIndex: 99999}}>
       <div className="glass-effect rounded-3xl shadow-2xl w-full max-w-md border border-white/20 overflow-hidden">
         <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 p-6 text-white relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 backdrop-blur-sm"></div>

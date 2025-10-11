@@ -10,7 +10,27 @@ const api = axios.create({
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
   if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+    try {
+      // Check if token is expired before making request
+      const tokenPayload = JSON.parse(atob(token.split('.')[1]));
+      const currentTime = Date.now() / 1000;
+      
+      if (tokenPayload.exp && tokenPayload.exp < currentTime) {
+        // Token expired, clear storage and reject request
+        localStorage.removeItem('token');
+        localStorage.removeItem('refreshToken');
+        localStorage.removeItem('user');
+        window.dispatchEvent(new CustomEvent('auth:logout'));
+        return Promise.reject(new Error('Token expired'));
+      }
+      
+      config.headers.Authorization = `Bearer ${token}`;
+    } catch (error) {
+      console.error('Invalid token format:', error);
+      localStorage.removeItem('token');
+      localStorage.removeItem('refreshToken');
+      localStorage.removeItem('user');
+    }
   }
   return config;
 });
@@ -26,17 +46,26 @@ api.interceptors.response.use(
       try {
         const refreshToken = localStorage.getItem('refreshToken');
         if (refreshToken) {
-          const response = await axios.post('/api/auth/refresh', { refreshToken });
+          const response = await axios.post('/api/auth/refresh');
           const { token } = response.data;
           localStorage.setItem('token', token);
           originalRequest.headers.Authorization = `Bearer ${token}`;
           return api(originalRequest);
+        } else {
+          throw new Error('No refresh token');
         }
       } catch (refreshError) {
+        console.error('Token refresh failed:', refreshError);
         localStorage.removeItem('token');
         localStorage.removeItem('refreshToken');
         localStorage.removeItem('user');
-        window.location.href = '/';
+        
+        // Dispatch custom event for logout
+        window.dispatchEvent(new CustomEvent('auth:logout'));
+        
+        if (window.location.pathname !== '/') {
+          window.location.href = '/';
+        }
       }
     }
     

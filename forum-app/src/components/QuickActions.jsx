@@ -1,8 +1,18 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useState } from 'react';
+import AuthModal from './AuthModal';
 
 const QuickActions = () => {
   const { isAuthenticated } = useAuth();
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [authMode, setAuthMode] = useState('login');
+
+  const handleAuthRequired = (e) => {
+    e.preventDefault();
+    setAuthMode('login');
+    setShowAuthModal(true);
+  };
 
   const actions = [
     {
@@ -72,7 +82,24 @@ const QuickActions = () => {
             return (
               <button
                 key={index}
-                onClick={action.onClick}
+                onClick={action.requireAuth && !isAuthenticated ? handleAuthRequired : action.onClick}
+                className={`group p-4 rounded-2xl ${action.bgColor} hover:shadow-lg transition-all hover-lift animate-fade-in-up`}
+                style={{animationDelay: `${index * 0.1}s`}}
+              >
+                <div className="text-center text-white">
+                  <div className="text-3xl mb-2">{action.icon}</div>
+                  <h4 className="font-bold text-sm">{action.title}</h4>
+                  <p className="text-xs opacity-90">{action.description}</p>
+                </div>
+              </button>
+            );
+          }
+          
+          if (action.requireAuth && !isAuthenticated) {
+            return (
+              <button
+                key={index}
+                onClick={handleAuthRequired}
                 className={`group p-4 rounded-2xl ${action.bgColor} hover:shadow-lg transition-all hover-lift animate-fade-in-up`}
                 style={{animationDelay: `${index * 0.1}s`}}
               >
@@ -101,6 +128,13 @@ const QuickActions = () => {
           );
         })}
       </div>
+      
+      <AuthModal 
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+        mode={authMode}
+        onModeChange={setAuthMode}
+      />
     </div>
   );
 };

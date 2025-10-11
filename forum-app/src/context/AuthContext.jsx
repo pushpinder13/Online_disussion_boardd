@@ -18,13 +18,20 @@ export const AuthProvider = ({ children }) => {
 
   const refreshToken = useCallback(async () => {
     try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        logout();
+        return false;
+      }
+      
       const response = await authAPI.refresh();
-      const { token, user } = response.data;
-      localStorage.setItem('token', token);
+      const { token: newToken, user } = response.data;
+      localStorage.setItem('token', newToken);
       localStorage.setItem('user', JSON.stringify(user));
       setUser(user);
       return true;
     } catch (error) {
+      console.error('Token refresh failed:', error);
       logout();
       return false;
     }
@@ -39,20 +46,44 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     const userData = localStorage.getItem('user');
+    
     if (token && userData) {
       try {
-        setUser(JSON.parse(userData));
-        setupTokenRefresh();
+        // Check if token is expired
+        const tokenPayload = JSON.parse(atob(token.split('.')[1]));
+        const currentTime = Date.now() / 1000;
+        
+        if (tokenPayload.exp && tokenPayload.exp < currentTime) {
+          // Token expired, clear storage
+          localStorage.removeItem('token');
+          localStorage.removeItem('refreshToken');
+          localStorage.removeItem('user');
+          setUser(null);
+        } else {
+          setUser(JSON.parse(userData));
+          setupTokenRefresh();
+        }
       } catch (error) {
-        console.error('Invalid user data in localStorage:', error);
+        console.error('Invalid token or user data:', error);
         localStorage.removeItem('user');
         localStorage.removeItem('token');
+        localStorage.removeItem('refreshToken');
+        setUser(null);
       }
     }
     setLoading(false);
 
+    // Listen for logout events from API interceptor
+    const handleLogout = () => {
+      setUser(null);
+      if (refreshTimer) clearInterval(refreshTimer);
+    };
+    
+    window.addEventListener('auth:logout', handleLogout);
+
     return () => {
       if (refreshTimer) clearInterval(refreshTimer);
+      window.removeEventListener('auth:logout', handleLogout);
     };
   }, [setupTokenRefresh, refreshTimer]);
 
