@@ -77,7 +77,7 @@ const ThreadsManagement = () => {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-gray-900">Threads Management</h1>
+        <h1 className="text-2xl font-bold text-white">Threads Management</h1>
         <div className="flex space-x-2">
           <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all">
             Pin Thread
@@ -88,20 +88,20 @@ const ThreadsManagement = () => {
         </div>
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm border">
-        <div className="p-6 border-b">
+      <div className="bg-gradient-to-br from-black/30 via-black/20 to-black/30 backdrop-blur-2xl rounded-xl shadow-sm border border-white/10">
+        <div className="p-6 border-b border-white/10">
           <div className="flex flex-col sm:flex-row gap-4">
             <div className="flex-1">
               <input
                 type="text"
                 placeholder="Search threads..."
-                className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 backdrop-blur-sm"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
             <select
-              className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 backdrop-blur-sm"
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
             >
@@ -115,35 +115,35 @@ const ThreadsManagement = () => {
 
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-gray-50">
+            <thead className="bg-white/5">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  <input type="checkbox" className="rounded border-gray-300" />
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                  <input type="checkbox" className="rounded border-white/20" />
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Thread</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Author</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Stats</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Thread</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Author</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Category</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Stats</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Status</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200">
+            <tbody className="divide-y divide-white/10">
               {filteredThreads.map((thread) => (
-                <tr key={thread._id} className="hover:bg-gray-50">
+                <tr key={thread._id} className="hover:bg-white/5">
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <input type="checkbox" className="rounded border-gray-300" />
+                    <input type="checkbox" className="rounded border-white/20" />
                   </td>
                   <td className="px-6 py-4">
-                    <div className="text-sm font-medium text-gray-900">{thread.title}</div>
-                    <div className="text-sm text-gray-500">{new Date(thread.createdAt).toLocaleDateString()}</div>
+                    <div className="text-sm font-medium text-white">{thread.title}</div>
+                    <div className="text-sm text-gray-400">{new Date(thread.createdAt).toLocaleDateString()}</div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
                       <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white text-sm font-semibold">
                         {thread.author?.username?.charAt(0).toUpperCase()}
                       </div>
-                      <span className="ml-2 text-sm text-gray-900">{thread.author?.username}</span>
+                      <span className="ml-2 text-sm text-white">{thread.author?.username}</span>
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
@@ -151,7 +151,7 @@ const ThreadsManagement = () => {
                       {thread.category?.name || 'General'}
                     </span>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
                     <div>{thread.replies?.length || 0} replies</div>
                     <div>{thread.views || 0} views</div>
                   </td>
@@ -196,14 +196,14 @@ const ThreadsManagement = () => {
 
       {editingThread && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 w-96">
-            <h3 className="text-lg font-semibold mb-4">Edit Thread</h3>
+          <div className="bg-gradient-to-br from-black/90 via-gray-900/90 to-black/90 backdrop-blur-2xl rounded-lg p-6 w-96 border border-white/10">
+            <h3 className="text-lg font-semibold mb-4 text-white">Edit Thread</h3>
             <div className="space-y-4">
               <input 
                 type="text" 
                 value={editTitle}
                 onChange={(e) => setEditTitle(e.target.value)}
-                className="w-full px-3 py-2 border rounded-lg"
+                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 backdrop-blur-sm"
                 placeholder="Thread title"
               />
               <div className="flex space-x-2">
@@ -215,7 +215,7 @@ const ThreadsManagement = () => {
                 </button>
                 <button 
                   onClick={() => setEditingThread(null)}
-                  className="bg-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-400"
+                  className="bg-white/10 text-gray-300 px-4 py-2 rounded-lg hover:bg-white/20 border border-white/20"
                 >
                   Cancel
                 </button>

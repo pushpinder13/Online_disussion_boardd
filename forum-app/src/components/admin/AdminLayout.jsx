@@ -13,18 +13,18 @@ const AdminLayout = ({ children }) => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 bg-mesh flex flex-col lg:flex-row">
-      <div className="w-full lg:w-72 glass-enhanced shadow-2xl border-r border-white/20 backdrop-blur-xl">
-        <div className="p-8 border-b border-white/20">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex flex-col lg:flex-row">
+      <div className="w-full lg:w-72 bg-gradient-to-br from-black/30 via-black/20 to-black/30 backdrop-blur-2xl shadow-2xl border-r border-white/10">
+        <div className="p-8 border-b border-white/10">
           <div className="flex items-center space-x-3">
             <div className="w-12 h-12 bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 rounded-2xl flex items-center justify-center text-white font-bold text-xl shadow-2xl animate-float">
               <span className="animate-pulse">⚡</span>
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-gradient-enhanced">
+              <h1 className="text-2xl font-bold text-white">
                 Admin Panel
               </h1>
-              <p className="text-sm text-gray-600">Control Center</p>
+              <p className="text-sm text-gray-300">Control Center</p>
             </div>
           </div>
         </div>
@@ -37,7 +37,7 @@ const AdminLayout = ({ children }) => {
               className={`flex items-center p-4 rounded-2xl transition-all duration-300 whitespace-nowrap group hover-lift animate-fade-in-up ${
                 location.pathname === item.path
                   ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg transform scale-105'
-                  : 'bg-white/60 backdrop-blur-sm hover:bg-white/80 text-gray-700 hover:text-gray-900 border border-white/30'
+                  : 'bg-white/10 backdrop-blur-sm hover:bg-white/20 text-gray-300 hover:text-white border border-white/20'
               }`}
               style={{animationDelay: `${index * 0.1}s`}}
             >
@@ -64,14 +64,14 @@ const AdminLayout = ({ children }) => {
       </div>
 
       <div className="flex-1 flex flex-col">
-        <header className="glass-enhanced shadow-2xl border-b border-white/20 p-6 backdrop-blur-xl">
+        <header className="bg-gradient-to-r from-black/30 via-black/20 to-black/30 backdrop-blur-2xl shadow-2xl border-b border-white/10 p-6">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-3xl font-bold text-gradient-enhanced mb-1">Admin Dashboard</h2>
-              <p className="text-gray-600">Manage your community with powerful tools</p>
+              <h2 className="text-3xl font-bold text-white mb-1">Admin Dashboard</h2>
+              <p className="text-gray-300">Manage your community with powerful tools</p>
             </div>
             <div className="flex items-center space-x-4">
-              <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-3 border border-white/30">
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-3 border border-white/20">
                 <div className="flex items-center space-x-3">
                   <div className="relative">
                     <div className="w-12 h-12 bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 rounded-2xl flex items-center justify-center text-white font-bold text-lg shadow-lg">
@@ -80,8 +80,8 @@ const AdminLayout = ({ children }) => {
                     <div className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-400 rounded-full border-2 border-white animate-pulse"></div>
                   </div>
                   <div className="hidden sm:block">
-                    <div className="font-bold text-gray-800">{user?.username}</div>
-                    <div className="text-sm text-gray-600">Administrator</div>
+                    <div className="font-bold text-white">{user?.username}</div>
+                    <div className="text-sm text-gray-300">Administrator</div>
                   </div>
                 </div>
               </div>

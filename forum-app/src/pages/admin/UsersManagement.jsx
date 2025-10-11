@@ -94,7 +94,7 @@ const UsersManagement = () => {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-gray-900">Users Management</h1>
+        <h1 className="text-2xl font-bold text-white">Users Management</h1>
         <button 
           onClick={() => setShowAddUser(true)}
           className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all"
@@ -103,20 +103,20 @@ const UsersManagement = () => {
         </button>
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm border">
-        <div className="p-6 border-b">
+      <div className="bg-gradient-to-br from-black/30 via-black/20 to-black/30 backdrop-blur-2xl rounded-xl shadow-sm border border-white/10">
+        <div className="p-6 border-b border-white/10">
           <div className="flex flex-col sm:flex-row gap-4">
             <div className="flex-1">
               <input
                 type="text"
                 placeholder="Search users..."
-                className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 backdrop-blur-sm"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
             <select
-              className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 backdrop-blur-sm"
               value={filterRole}
               onChange={(e) => setFilterRole(e.target.value)}
             >
@@ -130,26 +130,26 @@ const UsersManagement = () => {
 
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-gray-50">
+            <thead className="bg-white/5">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">User</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Join Date</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">User</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Role</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Status</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Join Date</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200">
+            <tbody className="divide-y divide-white/10">
               {filteredUsers.map((user) => (
-                <tr key={user._id || user.id} className="hover:bg-gray-50">
+                <tr key={user._id || user.id} className="hover:bg-white/5">
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
                       <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold">
                         {user.username?.charAt(0).toUpperCase()}
                       </div>
                       <div className="ml-4">
-                        <div className="text-sm font-medium text-gray-900">{user.username}</div>
-                        <div className="text-sm text-gray-500">{user.email}</div>
+                        <div className="text-sm font-medium text-white">{user.username}</div>
+                        <div className="text-sm text-gray-400">{user.email}</div>
                       </div>
                     </div>
                   </td>
@@ -169,7 +169,7 @@ const UsersManagement = () => {
                       {user.isActive ? 'Active' : 'Inactive'}
                     </span>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
                     {new Date(user.createdAt || user.joinDate).toLocaleDateString()}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
@@ -204,15 +204,15 @@ const UsersManagement = () => {
 
       {editingUser && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 w-96">
-            <h3 className="text-lg font-semibold mb-4">Edit User Role</h3>
+          <div className="bg-gradient-to-br from-black/90 via-gray-900/90 to-black/90 backdrop-blur-2xl rounded-lg p-6 w-96 border border-white/10">
+            <h3 className="text-lg font-semibold mb-4 text-white">Edit User Role</h3>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium mb-2">User: {editingUser.username}</label>
+                <label className="block text-sm font-medium mb-2 text-gray-300">User: {editingUser.username}</label>
                 <select 
                   value={newRole} 
                   onChange={(e) => setNewRole(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg"
+                  className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white backdrop-blur-sm"
                 >
                   <option value="user">User</option>
                   <option value="moderator">Moderator</option>
@@ -228,7 +228,7 @@ const UsersManagement = () => {
                 </button>
                 <button 
                   onClick={() => setEditingUser(null)}
-                  className="bg-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-400"
+                  className="bg-white/10 text-gray-300 px-4 py-2 rounded-lg hover:bg-white/20 border border-white/20"
                 >
                   Cancel
                 </button>
@@ -240,34 +240,34 @@ const UsersManagement = () => {
 
       {showAddUser && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 w-96">
-            <h3 className="text-lg font-semibold mb-4">Add New User</h3>
+          <div className="bg-gradient-to-br from-black/90 via-gray-900/90 to-black/90 backdrop-blur-2xl rounded-lg p-6 w-96 border border-white/10">
+            <h3 className="text-lg font-semibold mb-4 text-white">Add New User</h3>
             <div className="space-y-4">
               <input 
                 type="text" 
                 placeholder="Username" 
                 value={newUser.username}
                 onChange={(e) => setNewUser({...newUser, username: e.target.value})}
-                className="w-full px-3 py-2 border rounded-lg"
+                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 backdrop-blur-sm"
               />
               <input 
                 type="email" 
                 placeholder="Email" 
                 value={newUser.email}
                 onChange={(e) => setNewUser({...newUser, email: e.target.value})}
-                className="w-full px-3 py-2 border rounded-lg"
+                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 backdrop-blur-sm"
               />
               <input 
                 type="password" 
                 placeholder="Password" 
                 value={newUser.password}
                 onChange={(e) => setNewUser({...newUser, password: e.target.value})}
-                className="w-full px-3 py-2 border rounded-lg"
+                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 backdrop-blur-sm"
               />
               <select 
                 value={newUser.role} 
                 onChange={(e) => setNewUser({...newUser, role: e.target.value})}
-                className="w-full px-3 py-2 border rounded-lg"
+                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white backdrop-blur-sm"
               >
                 <option value="user">User</option>
                 <option value="moderator">Moderator</option>
@@ -282,7 +282,7 @@ const UsersManagement = () => {
                 </button>
                 <button 
                   onClick={() => setShowAddUser(false)}
-                  className="bg-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-400"
+                  className="bg-white/10 text-gray-300 px-4 py-2 rounded-lg hover:bg-white/20 border border-white/20"
                 >
                   Cancel
                 </button>

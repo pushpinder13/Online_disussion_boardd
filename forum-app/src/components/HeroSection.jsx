@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import StatsCard from './StatsCard';
 
 const HeroSection = ({ stats }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -68,34 +69,34 @@ const HeroSection = ({ stats }) => {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-          <div className="group bg-black/20 backdrop-blur-xl rounded-3xl p-8 text-center border border-white/10 hover:border-white/20 transition-all hover:bg-black/30">
-            <div className="text-4xl font-black bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent mb-2">
-              {stats?.discussions || 0}
-            </div>
-            <div className="text-gray-300 font-medium">Active Discussions</div>
-            <div className="w-full h-1 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full mt-3 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          </div>
-          <div className="group bg-black/20 backdrop-blur-xl rounded-3xl p-8 text-center border border-white/10 hover:border-white/20 transition-all hover:bg-black/30">
-            <div className="text-4xl font-black bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent mb-2">
-              {stats?.categories || 0}
-            </div>
-            <div className="text-gray-300 font-medium">Categories</div>
-            <div className="w-full h-1 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full mt-3 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          </div>
-          <div className="group bg-black/20 backdrop-blur-xl rounded-3xl p-8 text-center border border-white/10 hover:border-white/20 transition-all hover:bg-black/30">
-            <div className="text-4xl font-black bg-gradient-to-r from-pink-400 to-rose-400 bg-clip-text text-transparent mb-2">
-              {stats?.replies || 0}
-            </div>
-            <div className="text-gray-300 font-medium">Total Replies</div>
-            <div className="w-full h-1 bg-gradient-to-r from-pink-400 to-rose-400 rounded-full mt-3 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          </div>
-          <div className="group bg-black/20 backdrop-blur-xl rounded-3xl p-8 text-center border border-white/10 hover:border-white/20 transition-all hover:bg-black/30">
-            <div className="text-4xl font-black bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-2">
-              {stats?.views || 0}
-            </div>
-            <div className="text-gray-300 font-medium">Total Views</div>
-            <div className="w-full h-1 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full mt-3 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          </div>
+          <StatsCard 
+            icon="💬"
+            title="Active Discussions"
+            value={stats?.discussions || 0}
+            trend={12}
+            color="orange"
+          />
+          <StatsCard 
+            icon="📚"
+            title="Categories"
+            value={stats?.categories || 0}
+            trend={5}
+            color="green"
+          />
+          <StatsCard 
+            icon="💭"
+            title="Total Replies"
+            value={stats?.replies || 0}
+            trend={-2}
+            color="purple"
+          />
+          <StatsCard 
+            icon="👀"
+            title="Total Views"
+            value={stats?.views || 0}
+            trend={18}
+            color="blue"
+          />
         </div>
 
         <div className="bg-black/20 backdrop-blur-xl rounded-3xl p-10 border border-white/10 hover:border-white/20 transition-all">

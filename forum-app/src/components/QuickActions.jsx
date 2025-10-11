@@ -70,26 +70,28 @@ const QuickActions = () => {
   const visibleActions = actions;
 
   return (
-    <div className="glass-enhanced rounded-3xl shadow-xl p-6 border border-white/20 animate-fade-in-up">
-      <h3 className="text-xl font-bold text-gray-900 mb-6 text-center">
-        <span className="mr-2">⚡</span>
-        Quick Actions
-      </h3>
-      
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+    <div className="relative">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
         {visibleActions.map((action, index) => {
           if (action.onClick) {
             return (
               <button
                 key={index}
                 onClick={action.requireAuth && !isAuthenticated ? handleAuthRequired : action.onClick}
-                className={`group p-4 rounded-2xl ${action.bgColor} hover:shadow-lg transition-all hover-lift animate-fade-in-up`}
+                className="group relative overflow-hidden bg-gradient-to-br from-black/40 via-black/30 to-black/40 backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-white/20 transition-all duration-500 hover:scale-105 hover:shadow-2xl animate-fade-in-up"
                 style={{animationDelay: `${index * 0.1}s`}}
               >
-                <div className="text-center text-white">
-                  <div className="text-3xl mb-2">{action.icon}</div>
-                  <h4 className="font-bold text-sm">{action.title}</h4>
-                  <p className="text-xs opacity-90">{action.description}</p>
+                <div className={`absolute inset-0 ${action.bgColor} opacity-0 group-hover:opacity-20 transition-opacity duration-500 rounded-3xl`}></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 -translate-x-full group-hover:animate-shine"></div>
+                <div className="relative z-10 text-center text-white">
+                  <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl ${action.bgColor} mb-4 text-2xl shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                    {action.icon}
+                  </div>
+                  <h4 className="font-bold text-lg mb-2 group-hover:text-blue-300 transition-colors">{action.title}</h4>
+                  <p className="text-sm text-gray-300 group-hover:text-gray-200 transition-colors leading-relaxed">{action.description}</p>
+                  <div className="mt-4 flex justify-center">
+                    <div className="w-8 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
                 </div>
               </button>
             );
@@ -100,13 +102,20 @@ const QuickActions = () => {
               <button
                 key={index}
                 onClick={handleAuthRequired}
-                className={`group p-4 rounded-2xl ${action.bgColor} hover:shadow-lg transition-all hover-lift animate-fade-in-up`}
+                className="group relative overflow-hidden bg-gradient-to-br from-black/40 via-black/30 to-black/40 backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-white/20 transition-all duration-500 hover:scale-105 hover:shadow-2xl animate-fade-in-up"
                 style={{animationDelay: `${index * 0.1}s`}}
               >
-                <div className="text-center text-white">
-                  <div className="text-3xl mb-2">{action.icon}</div>
-                  <h4 className="font-bold text-sm">{action.title}</h4>
-                  <p className="text-xs opacity-90">{action.description}</p>
+                <div className={`absolute inset-0 ${action.bgColor} opacity-0 group-hover:opacity-20 transition-opacity duration-500 rounded-3xl`}></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 -translate-x-full group-hover:animate-shine"></div>
+                <div className="relative z-10 text-center text-white">
+                  <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl ${action.bgColor} mb-4 text-2xl shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                    {action.icon}
+                  </div>
+                  <h4 className="font-bold text-lg mb-2 group-hover:text-blue-300 transition-colors">{action.title}</h4>
+                  <p className="text-sm text-gray-300 group-hover:text-gray-200 transition-colors leading-relaxed">{action.description}</p>
+                  <div className="mt-4 flex justify-center">
+                    <div className="w-8 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
                 </div>
               </button>
             );
@@ -116,13 +125,20 @@ const QuickActions = () => {
             <Link
               key={index}
               to={action.link}
-              className={`group p-4 rounded-2xl ${action.bgColor} hover:shadow-lg transition-all hover-lift animate-fade-in-up`}
+              className="group relative overflow-hidden bg-gradient-to-br from-black/40 via-black/30 to-black/40 backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-white/20 transition-all duration-500 hover:scale-105 hover:shadow-2xl animate-fade-in-up"
               style={{animationDelay: `${index * 0.1}s`}}
             >
-              <div className="text-center text-white">
-                <div className="text-3xl mb-2">{action.icon}</div>
-                <h4 className="font-bold text-sm">{action.title}</h4>
-                <p className="text-xs opacity-90">{action.description}</p>
+              <div className={`absolute inset-0 ${action.bgColor} opacity-0 group-hover:opacity-20 transition-opacity duration-500 rounded-3xl`}></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 -translate-x-full group-hover:animate-shine"></div>
+              <div className="relative z-10 text-center text-white">
+                <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl ${action.bgColor} mb-4 text-2xl shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                  {action.icon}
+                </div>
+                <h4 className="font-bold text-lg mb-2 group-hover:text-blue-300 transition-colors">{action.title}</h4>
+                <p className="text-sm text-gray-300 group-hover:text-gray-200 transition-colors leading-relaxed">{action.description}</p>
+                <div className="mt-4 flex justify-center">
+                  <div className="w-8 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
               </div>
             </Link>
           );

@@ -69,19 +69,42 @@ const Header = () => {
 
   return (
     <>
-      <header className="glass-enhanced shadow-2xl border-b border-white/20 sticky top-0 z-40 bg-mesh backdrop-blur-xl">
+      <header className="glass-morphism-dark shadow-2xl border-b border-white/10 sticky top-0 z-50 backdrop-blur-3xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            <Link to="/" className="text-xl sm:text-2xl font-bold text-gradient-enhanced hover:scale-105 transition-all duration-300 flex items-center space-x-3 hover-glow group">
+          <div className="flex justify-between items-center h-24">
+            <Link to="/" className="group flex items-center space-x-4 hover:scale-105 transition-all duration-500">
               <div className="relative">
-                <div className="w-12 h-12 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-2xl flex items-center justify-center text-white font-bold text-lg animate-float shadow-2xl group-hover:shadow-blue-500/25 transition-all duration-300">
-                  <span className="animate-pulse">F</span>
+                {/* Main logo container */}
+                <div className="w-14 h-14 bg-gradient-to-br from-blue-500 via-purple-600 to-pink-600 rounded-2xl flex items-center justify-center shadow-2xl group-hover:shadow-purple-500/50 transition-all duration-500 relative overflow-hidden">
+                  {/* Animated background */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  
+                  {/* Logo icon */}
+                  <div className="relative z-10 flex items-center justify-center">
+                    <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                      <circle cx="12" cy="8" r="2" fill="white"/>
+                      <path d="M12 10c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" fill="white" opacity="0.8"/>
+                    </svg>
+                  </div>
+                  
+                  {/* Shine effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 -translate-x-full group-hover:animate-shine"></div>
                 </div>
-                <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-white animate-pulse"></div>
+                
+                {/* Status indicator */}
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full border-2 border-white shadow-lg">
+                  <div className="w-full h-full bg-green-400 rounded-full animate-pulse"></div>
+                </div>
               </div>
+              
               <div className="flex flex-col">
-                <span className="text-shadow font-black tracking-tight">ForumHub</span>
-                <span className="text-xs text-blue-600 font-medium -mt-1">Community Platform</span>
+                <span className="text-2xl font-black text-white text-shadow-lg group-hover:animate-gradient-text transition-all duration-300">
+                  ForumHub
+                </span>
+                <span className="text-xs text-blue-300 font-medium -mt-1 group-hover:text-blue-200 transition-colors">
+                  💬 Connect & Discuss
+                </span>
               </div>
             </Link>
 
@@ -89,18 +112,18 @@ const Header = () => {
               <form onSubmit={handleSearchSubmit} className="relative">
                 <input
                   type="text"
-                  placeholder="Search amazing discussions..."
+                  placeholder="Discover amazing content..."
                   value={searchQuery}
                   onChange={(e) => handleSearch(e.target.value)}
-                  className="w-80 px-6 py-4 pl-14 bg-white/80 backdrop-blur-sm border-2 border-white/40 rounded-2xl focus:ring-4 focus:ring-blue-500/30 focus:border-blue-500 transition-all duration-300 text-gray-700 placeholder-gray-500 shadow-lg hover:shadow-xl group-hover:w-96"
+                  className="w-80 px-6 py-3 pl-12 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl focus:ring-2 focus:ring-blue-500/30 focus:border-blue-400 transition-all duration-300 text-white placeholder-gray-300 shadow-lg hover:shadow-xl group-hover:w-96"
                 />
                 <button type="submit" className="absolute left-4 top-1/2 transform -translate-y-1/2">
-                  <svg className="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-gray-300 hover:text-blue-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
                 </button>
                 <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
-                  <kbd className="px-2 py-1 text-xs font-semibold text-gray-500 bg-gray-200 border border-gray-300 rounded-lg">⌘K</kbd>
+                  <kbd className="px-2 py-1 text-xs font-semibold text-gray-300 bg-white/10 border border-white/20 rounded-lg">⌘K</kbd>
                 </div>
               </form>
               
@@ -138,7 +161,7 @@ const Header = () => {
               )}
             </div>
 
-            <div className="flex items-center space-x-2 sm:space-x-4">
+            <div className="flex items-center space-x-4">
               {isAuthenticated ? (
                 <>
                   <div className="relative" ref={notificationRef}>
@@ -216,24 +239,27 @@ const Header = () => {
 
                   <Link 
                     to="/create" 
-                    className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-6 py-3 rounded-2xl hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-emerald-500/25 flex items-center space-x-2 font-semibold"
+                    className="group bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-6 py-3 rounded-2xl hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-emerald-500/25 flex items-center space-x-2 font-semibold relative overflow-hidden"
                   >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <svg className="w-5 h-5 relative z-10 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                     </svg>
-                    <span className="hidden sm:inline">Create</span>
+                    <span className="hidden sm:inline relative z-10">✨ Create</span>
                   </Link>
                   {user?.role === 'admin' && (
                     <Link 
                       to="/admin" 
-                      className="relative bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 text-white px-6 py-3 rounded-2xl hover:from-purple-700 hover:via-pink-700 hover:to-red-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/25 flex items-center space-x-2 font-semibold overflow-hidden group"
+                      className="group relative bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 text-white px-6 py-3 rounded-2xl hover:from-purple-700 hover:via-pink-700 hover:to-red-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/25 flex items-center space-x-2 font-semibold overflow-hidden"
                     >
                       <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-orange-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                      <svg className="w-5 h-5 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-5 h-5 relative z-10 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                       </svg>
-                      <span className="hidden sm:inline relative z-10">Admin</span>
-                      <div className="absolute -top-1 -right-1 w-3 h-3 bg-yellow-400 rounded-full animate-pulse"></div>
+                      <span className="hidden sm:inline relative z-10">🔥 Admin</span>
+                      <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full animate-pulse border-2 border-white shadow-lg">
+                        <div className="w-full h-full bg-yellow-400 rounded-full animate-ping"></div>
+                      </div>
                     </Link>
                   )}
 
@@ -246,80 +272,112 @@ const Header = () => {
                   <div className="relative" ref={dropdownRef}>
                     <button
                       onClick={() => setShowDropdown(!showDropdown)}
-                      className="flex items-center space-x-3 p-3 rounded-2xl hover:bg-white/60 transition-all duration-300 border-2 border-transparent hover:border-white/50 group backdrop-blur-sm"
+                      className="group flex items-center space-x-3 p-3 rounded-2xl hover:bg-white/10 transition-all duration-300 border border-white/20 hover:border-white/40 backdrop-blur-sm"
                     >
                       <div className="relative">
-                        <div className="w-12 h-12 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-2xl flex items-center justify-center text-white font-bold text-lg shadow-2xl ring-4 ring-white/30 group-hover:ring-white/50 transition-all duration-300 group-hover:scale-105">
-                          {user?.username?.charAt(0).toUpperCase()}
+                        <div className="w-12 h-12 bg-gradient-to-br from-blue-500 via-purple-600 to-pink-600 rounded-2xl flex items-center justify-center text-white font-bold text-lg shadow-2xl ring-2 ring-white/20 group-hover:ring-white/40 transition-all duration-300 group-hover:scale-105 relative overflow-hidden">
+                          <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                          <span className="relative z-10">{user?.username?.charAt(0).toUpperCase()}</span>
                         </div>
-                        <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-white animate-pulse"></div>
+                        <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full border-2 border-white shadow-lg">
+                          <div className="w-full h-full bg-green-400 rounded-full animate-pulse"></div>
+                        </div>
                       </div>
                       <div className="hidden sm:block text-left">
-                        <div className="text-gray-800 font-bold text-sm">{user?.username}</div>
-                        <div className="text-gray-500 text-xs capitalize">{user?.role} Member</div>
+                        <div className="text-white font-bold text-sm group-hover:text-blue-200 transition-colors">{user?.username}</div>
+                        <div className="text-gray-300 text-xs capitalize group-hover:text-gray-200 transition-colors">🎆 {user?.role} Member</div>
                       </div>
-                      <svg className={`w-5 h-5 text-gray-500 transition-all duration-300 ${showDropdown ? 'rotate-180 text-blue-600' : 'group-hover:text-gray-700'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className={`w-5 h-5 text-gray-300 transition-all duration-300 ${showDropdown ? 'rotate-180 text-blue-400' : 'group-hover:text-white'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                       </svg>
                     </button>
 
                     {showDropdown && (
-                      <div className="absolute right-0 mt-3 w-52 glass-effect rounded-2xl shadow-2xl border border-white/20 py-2 z-50 animate-fade-in-up">
-                        <Link
-                          to="/profile"
-                          onClick={() => setShowDropdown(false)}
-                          className="w-full text-left px-4 py-3 text-gray-700 hover:bg-white/50 flex items-center transition-colors duration-200 rounded-lg mx-2"
-                        >
-                          <svg className="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                          </svg>
-                          My Profile
-                        </Link>
-                        <Link
-                          to="/my-threads"
-                          onClick={() => setShowDropdown(false)}
-                          className="w-full text-left px-4 py-3 text-gray-700 hover:bg-white/50 flex items-center transition-colors duration-200 rounded-lg mx-2"
-                        >
-                          <svg className="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                          </svg>
-                          My Threads
-                        </Link>
-                        <button
-                          onClick={() => {
-                            setShowProfileModal(true);
-                            setShowDropdown(false);
-                          }}
-                          className="w-full text-left px-4 py-3 text-gray-700 hover:bg-white/50 flex items-center transition-colors duration-200 rounded-lg mx-2"
-                        >
-                          <svg className="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                          </svg>
-                          Edit Profile
-                        </button>
-                        <Link
-                          to="/settings"
-                          onClick={() => setShowDropdown(false)}
-                          className="w-full text-left px-4 py-3 text-gray-700 hover:bg-white/50 flex items-center transition-colors duration-200 rounded-lg mx-2"
-                        >
-                          <svg className="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                          </svg>
-                          Settings
-                        </Link>
-                        <div className="my-2 mx-4 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+                      <div className="absolute right-0 mt-3 w-64 glass-morphism-dark rounded-3xl shadow-2xl border border-white/20 py-3 z-50 animate-scale-in backdrop-blur-2xl">
+                        <div className="px-4 py-3 border-b border-white/10">
+                          <div className="flex items-center space-x-3">
+                            <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center text-white font-bold">
+                              {user?.username?.charAt(0).toUpperCase()}
+                            </div>
+                            <div>
+                              <div className="text-white font-semibold">{user?.username}</div>
+                              <div className="text-gray-300 text-xs">🎆 {user?.role} Member</div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div className="py-2">
+                          <Link
+                            to="/profile"
+                            onClick={() => setShowDropdown(false)}
+                            className="group w-full text-left px-4 py-3 text-white hover:bg-white/10 flex items-center transition-all duration-200 rounded-xl mx-2"
+                          >
+                            <div className="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center mr-3 group-hover:bg-blue-500/30 transition-colors">
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                              </svg>
+                            </div>
+                            <span className="group-hover:text-blue-300 transition-colors">👤 My Profile</span>
+                          </Link>
+                          
+                          <Link
+                            to="/my-threads"
+                            onClick={() => setShowDropdown(false)}
+                            className="group w-full text-left px-4 py-3 text-white hover:bg-white/10 flex items-center transition-all duration-200 rounded-xl mx-2"
+                          >
+                            <div className="w-8 h-8 bg-green-500/20 rounded-lg flex items-center justify-center mr-3 group-hover:bg-green-500/30 transition-colors">
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                              </svg>
+                            </div>
+                            <span className="group-hover:text-green-300 transition-colors">📝 My Threads</span>
+                          </Link>
+                          
+                          <button
+                            onClick={() => {
+                              setShowProfileModal(true);
+                              setShowDropdown(false);
+                            }}
+                            className="group w-full text-left px-4 py-3 text-white hover:bg-white/10 flex items-center transition-all duration-200 rounded-xl mx-2"
+                          >
+                            <div className="w-8 h-8 bg-purple-500/20 rounded-lg flex items-center justify-center mr-3 group-hover:bg-purple-500/30 transition-colors">
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                              </svg>
+                            </div>
+                            <span className="group-hover:text-purple-300 transition-colors">✏️ Edit Profile</span>
+                          </button>
+                          
+                          <Link
+                            to="/settings"
+                            onClick={() => setShowDropdown(false)}
+                            className="group w-full text-left px-4 py-3 text-white hover:bg-white/10 flex items-center transition-all duration-200 rounded-xl mx-2"
+                          >
+                            <div className="w-8 h-8 bg-gray-500/20 rounded-lg flex items-center justify-center mr-3 group-hover:bg-gray-500/30 transition-colors">
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                              </svg>
+                            </div>
+                            <span className="group-hover:text-gray-300 transition-colors">⚙️ Settings</span>
+                          </Link>
+                        </div>
+                        
+                        <div className="mx-4 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent my-2"></div>
+                        
                         <button
                           onClick={() => {
                             logout();
                             setShowDropdown(false);
                           }}
-                          className="w-full text-left px-4 py-3 text-red-600 hover:bg-red-50/50 flex items-center transition-colors duration-200 rounded-lg mx-2"
+                          className="group w-full text-left px-4 py-3 text-red-400 hover:bg-red-500/10 flex items-center transition-all duration-200 rounded-xl mx-2"
                         >
-                          <svg className="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                          </svg>
-                          Logout
+                          <div className="w-8 h-8 bg-red-500/20 rounded-lg flex items-center justify-center mr-3 group-hover:bg-red-500/30 transition-colors">
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                            </svg>
+                          </div>
+                          <span className="group-hover:text-red-300 transition-colors">🚪 Logout</span>
                         </button>
                       </div>
                     )}

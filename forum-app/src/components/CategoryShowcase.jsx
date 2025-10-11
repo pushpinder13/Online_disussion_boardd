@@ -44,13 +44,13 @@ const CategoryShowcase = ({ categories = [], onCategorySelect, onCategoryCreated
   };
 
   return (
-    <div id="categories" className="bg-white rounded-3xl shadow-xl p-8 border border-gray-100">
+    <div id="categories" className="bg-gradient-to-br from-black/30 via-black/20 to-black/30 backdrop-blur-2xl rounded-3xl shadow-xl p-8 border border-white/10">
       <div className="text-center mb-8">
-        <h2 className="text-2xl font-bold text-gray-900 mb-2 flex items-center justify-center">
+        <h2 className="text-2xl font-bold text-white mb-2 flex items-center justify-center">
           <span className="text-3xl mr-3">🎯</span>
           Explore Categories
         </h2>
-        <p className="text-gray-600">Find your perfect discussion topic</p>
+        <p className="text-gray-300">Find your perfect discussion topic</p>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -60,7 +60,7 @@ const CategoryShowcase = ({ categories = [], onCategorySelect, onCategoryCreated
             onClick={() => onCategorySelect(category._id)}
             onMouseEnter={() => setHoveredCategory(category._id)}
             onMouseLeave={() => setHoveredCategory(null)}
-            className={`group relative bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 hover:shadow-lg transition-all duration-300 border border-gray-200 hover:border-blue-200 animate-fade-in-up ${index >= 8 ? 'category-hidden hidden' : ''}`}
+            className={`group relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl p-6 hover:shadow-lg transition-all duration-300 border border-white/10 hover:border-blue-400/50 animate-fade-in-up ${index >= 8 ? 'category-hidden hidden' : ''}`}
             style={{ animationDelay: `${(index % 8) * 0.1}s` }}
           >
             <div className="text-center">
@@ -69,10 +69,10 @@ const CategoryShowcase = ({ categories = [], onCategorySelect, onCategoryCreated
               }`}>
                 {getCategoryIcon(category.name, category._id)}
               </div>
-              <h3 className="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors mb-2">
+              <h3 className="font-semibold text-white group-hover:text-blue-400 transition-colors mb-2">
                 {category.name}
               </h3>
-              <p className="text-sm text-gray-500 line-clamp-2 mb-3">
+              <p className="text-sm text-gray-300 line-clamp-2 mb-3">
                 {category.description || 'Join the discussion'}
               </p>
               
@@ -89,7 +89,7 @@ const CategoryShowcase = ({ categories = [], onCategorySelect, onCategoryCreated
             </div>
 
             {hoveredCategory === category._id && (
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10 rounded-2xl border-2 border-blue-200 animate-fade-in-up"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-2xl border-2 border-blue-400/50 animate-fade-in-up"></div>
             )}
           </button>
         ))}
@@ -98,8 +98,8 @@ const CategoryShowcase = ({ categories = [], onCategorySelect, onCategoryCreated
       {categories.length === 0 && (
         <div className="text-center py-12">
           <div className="text-6xl mb-4">📂</div>
-          <h3 className="text-xl font-semibold text-gray-900 mb-2">No categories yet</h3>
-          <p className="text-gray-500">Categories will appear here once created</p>
+          <h3 className="text-xl font-semibold text-white mb-2">No categories yet</h3>
+          <p className="text-gray-300">Categories will appear here once created</p>
         </div>
       )}
       
@@ -111,7 +111,7 @@ const CategoryShowcase = ({ categories = [], onCategorySelect, onCategoryCreated
               hiddenCategories.forEach(cat => cat.classList.remove('category-hidden'));
               document.querySelector('.view-all-btn').style.display = 'none';
             }}
-            className="view-all-btn text-blue-600 hover:text-blue-700 font-medium"
+            className="view-all-btn text-blue-400 hover:text-blue-300 font-medium"
           >
             View All {categories.length} Categories →
           </button>
@@ -119,9 +119,9 @@ const CategoryShowcase = ({ categories = [], onCategorySelect, onCategoryCreated
       )}
 
       <div className="mt-8 text-center">
-        <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-6">
-          <h3 className="font-semibold text-gray-900 mb-2">Can't find your topic?</h3>
-          <p className="text-gray-600 text-sm mb-4">
+        <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+          <h3 className="font-semibold text-white mb-2">Can't find your topic?</h3>
+          <p className="text-gray-300 text-sm mb-4">
             Start a new discussion or create a new category!
           </p>
           <div className="flex flex-wrap justify-center gap-3">
@@ -135,7 +135,7 @@ const CategoryShowcase = ({ categories = [], onCategorySelect, onCategoryCreated
             {user?.role === 'admin' && (
               <button 
                 onClick={() => setShowCreateModal(true)}
-                className="inline-flex items-center space-x-2 bg-white/70 backdrop-blur-sm text-gray-700 px-6 py-3 rounded-xl hover:bg-white/90 transition-all border border-white/30"
+                className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm text-white px-6 py-3 rounded-xl hover:bg-white/20 transition-all border border-white/20"
               >
                 <span>🏷️</span>
                 <span>Create Category</span>
