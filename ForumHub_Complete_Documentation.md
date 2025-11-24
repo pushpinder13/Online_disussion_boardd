@@ -91,7 +91,7 @@ ForumHub/
 - **JWT-based authentication** with access and refresh tokens
 - **Role-based access control** (user, moderator, admin)
 - **Secure password hashing** using bcryptjs with salt rounds
-- **Admin registration** with special admin code "100"
+- **Admin registration** with configurable admin code
 - **Token expiry handling** with automatic refresh
 
 ### 2. Modern UI/UX Design
@@ -129,7 +129,7 @@ ForumHub/
 {
   username: String (unique, 3-30 chars),
   email: String (unique, valid email),
-  password: String (hashed, min 6 chars),
+  password: String (securely hashed, min 6 chars),
   avatar: String (optional),
   bio: String (max 500 chars),
   reputation: Number (default: 0),
@@ -201,9 +201,9 @@ ForumHub/
 ## Security Features
 
 ### 1. Authentication Security
-- **JWT tokens** with short expiry (15 minutes access, 7 days refresh)
+- **JWT tokens** with configurable expiry times
 - **HTTP-only cookies** for token storage
-- **Password hashing** with bcryptjs and salt rounds
+- **Password hashing** with bcryptjs and secure salt rounds
 - **Input validation** using express-validator
 
 ### 2. Data Protection
@@ -240,9 +240,9 @@ ForumHub/
 ### Environment Variables
 ```
 PORT=5000
-MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/database
-JWT_SECRET=your-secret-key
-NODE_ENV=production
+MONGO_URI=mongodb://localhost:27017/forumhub
+JWT_SECRET=your-generated-secret-key
+NODE_ENV=development
 ```
 
 ### Frontend Build
@@ -388,6 +388,7 @@ The combination of React.js frontend with Node.js backend provides a robust foun
 ```bash
 cd forum-backend
 npm install
+# Configure your .env file with database connection
 npm run dev
 ```
 
@@ -398,13 +399,13 @@ npm install
 npm run dev
 ```
 
-### 3. Create Test Users
-- Register with email: `test@example.com`, password: `password123`
-- For admin: use admin code "100" during registration
+### 3. Create Users
+- Register with your preferred email and password
+- For admin access: use the configured admin code during registration
 
 ### 4. Access Application
 - Frontend: http://localhost:5173
 - Backend API: http://localhost:5000
-- Admin Panel: Login with admin credentials
+- Admin Panel: Available after admin registration
 
 This documentation provides comprehensive coverage of the ForumHub project, including technical implementation details, architecture decisions, and practical usage instructions for development and deployment.
