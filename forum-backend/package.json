@@ -14,7 +14,7 @@
     "express",
     "mongodb"
   ],
-  "author": "RAJ CHAHAL",
+  "author": "Pushpinder Singh",
   "license": "MIT",
   "dependencies": {
     "axios": "^1.11.0",
