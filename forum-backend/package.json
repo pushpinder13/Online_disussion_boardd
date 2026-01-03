@@ -1,5 +1,5 @@
 {
-  "name": "@pushpinder/forum-backend",
+  "name": "forum-backend",
   "version": "1.0.0",
   "description": "Node.js + Express + MongoDB (Mongoose) forum backend",
   "main": "server.js",
