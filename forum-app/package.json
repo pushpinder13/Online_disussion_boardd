@@ -1,5 +1,5 @@
 {
-  "name": "forum-app",
+  "name": "@pushpinder/forum-app",
   "version": "1.0.0",
   "type": "module",
   "scripts": {

@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "forum-app/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "forum-app/dist"
+      }
+    },
+    {
+      "src": "forum-backend/server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/forum-backend/server.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/forum-app/dist/$1"
+    }
+  ]
+}
