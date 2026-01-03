@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: 'https://online-disussion-boardd.onrender.com/api',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -46,7 +46,7 @@ api.interceptors.response.use(
       try {
         const refreshToken = localStorage.getItem('refreshToken');
         if (refreshToken) {
-          const response = await axios.post('/api/auth/refresh');
+          const response = await axios.post('https://online-disussion-boardd.onrender.com/api/auth/refresh');
           const { token } = response.data;
           localStorage.setItem('token', token);
           originalRequest.headers.Authorization = `Bearer ${token}`;
