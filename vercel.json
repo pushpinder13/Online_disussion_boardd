@@ -5,7 +5,7 @@
       "src": "forum-app/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "forum-app/dist"
+        "distDir": "dist"
       }
     },
     {
@@ -22,5 +22,6 @@
       "src": "/(.*)",
       "dest": "/forum-app/dist/$1"
     }
-  ]
+  ],
+  "outputDirectory": "forum-app/dist"
 }

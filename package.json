@@ -1,0 +1,8 @@
+{
+  "name": "@pushpinder/forumhub",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "cd forum-app && npm install && npm run build",
+    "start": "node forum-backend/server.js"
+  }
+}
